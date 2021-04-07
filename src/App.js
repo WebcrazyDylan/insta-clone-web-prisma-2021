@@ -1,5 +1,5 @@
 function App() {
-  return <div></div>;
+  return <div>Insta Clone</div>;
 }
 
 export default App;
