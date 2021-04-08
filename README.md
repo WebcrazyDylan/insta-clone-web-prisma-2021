@@ -5,4 +5,4 @@
 - Architecture
 - Styles
 
-- Log in
+- Log In / Sign Up
