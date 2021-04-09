@@ -77,7 +77,7 @@ function Login() {
   };
   return (
     <AuthLayout>
-      <PageTitle title="Login" />
+      <PageTitle title="Log in" />
       <FormBox>
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
