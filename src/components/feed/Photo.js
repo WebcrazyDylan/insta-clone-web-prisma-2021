@@ -9,6 +9,7 @@ import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { FEED_QUERY } from "../../screens/Home";
 import Avatar from "../Avatar";
 import { FatText } from "../shared";
 
@@ -75,7 +76,8 @@ function Photo({ id, user, file, isLiked, likes }) {
   const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
     variables: {
       id
-    }
+    },
+    refetchQueries: [{ query: FEED_QUERY }]
   });
   return (
     <PhotoContainer key={id}>
