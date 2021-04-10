@@ -9,7 +9,6 @@ import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { FEED_QUERY } from "../../screens/Home";
 import Avatar from "../Avatar";
 import { FatText } from "../shared";
 
@@ -73,11 +72,33 @@ const Likes = styled(FatText)`
 `;
 
 function Photo({ id, user, file, isLiked, likes }) {
-  const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
+  const updateToggleLike = (cache, result) => {
+    const {
+      data: {
+        toggleLike: { ok }
+      }
+    } = result;
+    if (ok) {
+      cache.writeFragment({
+        id: `Photo:${id}`,
+        fragment: gql`
+          fragment BSName on Photo {
+            isLiked
+            likes
+          }
+        `,
+        data: {
+          isLiked: !isLiked,
+          likes: isLiked ? likes - 1 : likes + 1
+        }
+      });
+    }
+  };
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
     variables: {
       id
     },
-    refetchQueries: [{ query: FEED_QUERY }]
+    update: updateToggleLike
   });
   return (
     <PhotoContainer key={id}>
