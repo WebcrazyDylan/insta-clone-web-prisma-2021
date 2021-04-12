@@ -34,13 +34,13 @@ const Icon = styled.span`
   margin-left: 15px;
 `;
 
-// const Btn = styled.span`
-//   background-color: ${(props) => props.theme.accent};
-//   color: white;
-//   border-radius: 4px;
-//   padding: 5px 15px;
-//   font-weight: 600;
-// `;
+const Btn = styled.span`
+  background-color: ${(props) => props.theme.accent};
+  color: white;
+  border-radius: 4px;
+  padding: 5px 15px;
+  font-weight: 600;
+`;
 
 const Button = styled.span`
   background-color: ${(props) => props.theme.accent};
@@ -74,7 +74,9 @@ function Header() {
                 <FontAwesomeIcon icon={faCompass} size="lg" />
               </Icon>
               <Icon>
-                <Avatar url={data?.me?.avatar} />
+                <Link to={`/users/${data.me.username}`}>
+                  <Avatar url={data?.me?.avatar} />
+                </Link>
               </Icon>
             </IconsContainer>
           ) : (
